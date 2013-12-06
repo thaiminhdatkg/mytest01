@@ -1,0 +1,143 @@
+﻿<Window x:Class="WpfApplication1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Football Management System" Height="650" Width="800" 
+        Icon="{StaticResource icon_main}">
+    <Grid Background="#FFFCCC">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="150" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Margin="10, 10, 10, 0" BorderBrush="DarkGray" BorderThickness="1">
+            <Menu>
+                <MenuItem x:Name="menuItemFootballer" Click="MenuItem_menuItemFootballer_Click">
+                    <MenuItem.Header>
+                        <Grid HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Stretch" RenderTransformOrigin="0.613,-1.25" Height="92">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="24" />
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="{StaticResource footballer}" />
+                            <TextBlock Grid.Row="1" Text="Cầu Thủ" TextAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </MenuItem.Header>
+                </MenuItem>
+            </Menu>
+        </Border>
+        <Grid Grid.Row="1" Margin="10, 10, 10, 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <!--<ColumnDefinition Width="200" />-->
+            </Grid.ColumnDefinitions>
+            <ListView x:Name="listViewProgress" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="listViewProgress_listViewItem_PreviewMouseLeftButtonDown" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True">
+                        <GridViewColumn x:Name="SequenceNumber" DisplayMemberBinding="{Binding SequenceNumber}" Header="STT" Width="50" />
+                        <GridViewColumn x:Name="LastName" DisplayMemberBinding="{Binding LastName}" Header="Họ" Width="150" />
+                        <GridViewColumn x:Name="FirstName" DisplayMemberBinding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Header="Tên" Width="100"/>
+                        <GridViewColumn Width="70" Header="Đá">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=IsDa, NotifyOnTargetUpdated=True}" TargetUpdated="checkBox_isDa_TargetUpdated"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="70" Header="Không">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=IsKhong, NotifyOnTargetUpdated=True}" TargetUpdated="checkBox_isKhong_TargetUpdated"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="70" Header="Chưa hỏi">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=IsNone, NotifyOnTargetUpdated=True}" TargetUpdated="checkBox_isNone_TargetUpdated"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <!--
+            <Button Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.613,-1.25" Height="92" Click="button_footballer_click">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="24" />
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Source="{StaticResource footballer}" />
+                    <TextBlock Grid.Row="1" Text="Cầu Thủ" TextAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </Button>
+            -->
+        </Grid>
+        <Grid Grid.Row="2" Margin="10, 5, 10, 5">
+            <TabControl>
+                <TabItem x:Name="tabItemStatistic">
+                    <TabItem.Header>
+                        <Grid MinHeight="24" MinWidth="72">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="24" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{StaticResource statistic24}"/>
+                            <TextBlock Margin="10,0,0,0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <Bold Foreground="#008800">Thống kê</Bold>
+                            </TextBlock>
+                        </Grid>
+                    </TabItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="33" />
+                            <RowDefinition Height="33" />
+                            <RowDefinition Height="33" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{StaticResource ok32}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5"/>
+                            <TextBlock Grid.Column="1" Text="Đá" FontSize="16" Foreground="#008800" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10, 0, 0, 0"/>
+                            <TextBlock Grid.Column="2" x:Name="txtDa" Text="{Binding TotalDa, Mode=OneWay}" FontSize="16" Foreground="#008800" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10, 0, 0, 0"/>
+                            <ProgressBar Grid.Column="3" x:Name="prgDa" Value="{Binding PercentageDa, Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10, 5, 10, 5" Foreground="#008800"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{StaticResource denied32}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5"/>
+                            <TextBlock Grid.Column="1" Text="Không" FontSize="16" Foreground="#880000" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10, 0, 0, 0"/>
+                            <TextBlock Grid.Column="2" x:Name="txtKhong" Text="{Binding TotalKhong, Mode=OneWay}" FontSize="16" Foreground="#880000" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10, 0, 0, 0"/>
+                            <ProgressBar Grid.Column="3" x:Name="prgKhong" Value="{Binding PercentageKhong, Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10, 5, 10, 5" Foreground="#880000"/>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{StaticResource question32}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5"/>
+                            <TextBlock Grid.Column="1" Text="Chưa hỏi" FontSize="16" Foreground="#888800" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10, 0, 0, 0"/>
+                            <TextBlock Grid.Column="2" x:Name="txtNone" Text="{Binding TotalNone, Mode=OneWay}" FontSize="16" Foreground="#888800" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10, 0, 0, 0"/>
+                            <ProgressBar Grid.Column="3" x:Name="prgNone" Value="{Binding PercentageNone, Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10, 5, 10, 5" Foreground="#888800"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>

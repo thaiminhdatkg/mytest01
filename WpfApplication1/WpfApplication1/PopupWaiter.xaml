@@ -1,0 +1,13 @@
+﻿<Window x:Class="WpfApplication1.PopupWaiter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PopupWaiter" Height="300" Width="300" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Canvas Name="canvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" RenderTransformOrigin="-0.51,-0.015">
+            <Canvas.Background>
+                <ImageBrush ImageSource="{StaticResource bg_waiting}"/>
+            </Canvas.Background>
+            <Image x:Name="imageWaiting" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{StaticResource soccerBall128}" Canvas.Left="82" Canvas.Top="58" />
+        </Canvas>
+    </Grid>
+</Window>

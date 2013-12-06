@@ -1,0 +1,49 @@
+﻿<Window x:Class="WpfApplication1.UserDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add User" Height="158.209" Width="529.851">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="First Name" FontSize="20" TextAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Text="Last Name" FontSize="20" TextAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="2" Text="State" FontSize="20" TextAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <TextBox x:Name="txtBox_firstName" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10, 5, 10, 5"/>
+            <TextBox x:Name="txtBox_lastName" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10, 5, 10, 5"/>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <RadioButton x:Name="rb_isDa" Grid.Column="0" Content="Đá" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                <RadioButton x:Name="rb_isKhong" Grid.Column="1" Content="Không" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                <RadioButton x:Name="rb_isNone" IsChecked="True" Grid.Column="2" Content="Chưa hỏi" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" x:Name="btOK" Content="OK" Margin="5,5,5,5" Click="btOK_Click" />
+            <Button Grid.Row="1" x:Name="btCancel" Content="Cancel" Margin="5,5,5,5" Click="btCancel_Click" IsCancel="True"/>
+        </Grid>
+    </Grid>
+</Window>
